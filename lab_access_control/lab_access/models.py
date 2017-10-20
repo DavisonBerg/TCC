@@ -1,8 +1,15 @@
+'''
+Arquivo onde são definidos os modelos que representam entidades no banco de dados
+
+Dica: Aqui eu crio os tipos de usuário e quais dados eles terão
+'''
 from django.db import models
 
-# Aqui eu crio os tipos de usuário e quais dados eles terão
 
 class Professor(models.Model):
+    '''
+    Classe Professor
+    '''    
     nome = models.TextField()
     cpf = models.IntegerField()
     tag = models.TextField()
@@ -25,3 +32,17 @@ class Aluno(models.Model):
 
     class Meta:
         ordering = ('nome',)
+
+
+class Laboratorio(models.Model):
+    nome = models.TextField()
+
+    class Meta:
+        ordering = ('nome',)
+
+class Bancada(models.Model):
+    numero = models.IntegerField()
+    lab = models.ForeignKey('Laboratorio')
+
+    class Meta:
+        ordering = ('numero',)
