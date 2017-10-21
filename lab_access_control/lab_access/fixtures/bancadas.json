@@ -1,0 +1,34 @@
+[
+    {
+        "fields": {
+            "numero": "1",
+            "lab": 1
+        },
+        "model": "lab_access.bancada",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "numero": "2",
+            "lab": 1
+        },
+        "model": "lab_access.bancada",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "numero": "1",
+            "lab": 2
+        },
+        "model": "lab_access.bancada",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "numero": "2",
+            "lab": 2
+        },
+        "model": "lab_access.bancada",
+        "pk": 4
+    }
+]
