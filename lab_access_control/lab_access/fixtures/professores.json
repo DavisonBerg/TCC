@@ -1,0 +1,20 @@
+[
+    {
+        "fields": {
+            "nome": "João",
+            "cpf": "91678217255",
+            "tag": "111"
+        },
+        "model": "lab_access.professor",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "nome": "José",
+            "cpf": "36546008127",
+            "tag": "112"
+        },
+        "model": "lab_access.professor",
+        "pk": 2
+    }
+]

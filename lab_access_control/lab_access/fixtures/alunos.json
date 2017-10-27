@@ -1,0 +1,72 @@
+[
+    {
+        "fields": {
+            "nome": "Davison",
+            "cpf": "76945671350",
+            "tag": "121",
+            "lab": 1,
+            "bancada": 1,
+            "hora_inicio": "2017-10-19T09:00:00.974Z",
+            "hora_fim": "2017-10-19T11:00:00.974Z",
+            "professor_responsavel": 1
+        },
+        "model": "lab_access.aluno",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "nome": "José",
+            "cpf": "74930879254",
+            "tag": "122",
+            "lab": 1,
+            "bancada": 2,
+            "hora_inicio": "2017-10-19T08:30:00.974Z",
+            "hora_fim": "2017-10-19T11:30:00.974Z",
+            "professor_responsavel": 2
+        },
+        "model": "lab_access.aluno",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "nome": "Maria",
+            "cpf": "36374814412",
+            "tag": "123",
+            "lab": 2,
+            "bancada": 1,
+            "hora_inicio": "2017-10-19T08:00:00.974Z",
+            "hora_fim": "2017-10-19T10:00:00.974Z",
+            "professor_responsavel": 1
+        },
+        "model": "lab_access.aluno",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "nome": "Fulano",
+            "cpf": "68699994463",
+            "tag": "124",
+            "lab": null,
+            "bancada": null,
+            "hora_inicio": null,
+            "hora_fim": null,
+            "professor_responsavel": null
+        },
+        "model": "lab_access.aluno",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "nome": "Ana",
+            "cpf": "79701219288",
+            "tag": "125",
+            "lab": null,
+            "bancada": null,
+            "hora_inicio": null,
+            "hora_fim": null,
+            "professor_responsavel": null
+        },
+        "model": "lab_access.aluno",
+        "pk": 5
+    }
+]

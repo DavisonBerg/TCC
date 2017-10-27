@@ -17,7 +17,7 @@ class TecnicoSerializer(serializers.ModelSerializer):
 class AlunoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Aluno
-        fields = ('id','nome','cpf','tag')
+        fields = ('id','nome','cpf','tag', 'lab', 'bancada', 'hora_inicio', 'hora_fim', 'professor_responsavel')
 
 
 class LaboratorioSerializer(serializers.ModelSerializer):

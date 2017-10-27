@@ -50,6 +50,7 @@ class Aluno(models.Model):
     bancada = models.ForeignKey('Bancada', blank=True, null=True)
     hora_inicio = models.DateTimeField(blank=True, null=True)
     hora_fim = models.DateTimeField(blank=True, null=True)
+    professor_responsavel = models.ForeignKey('Professor', blank=True, null=True)
 
     class Meta:
         ordering = ('nome',)
