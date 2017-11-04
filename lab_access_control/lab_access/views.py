@@ -19,6 +19,7 @@ class ProfessorRetrieve(generics.RetrieveAPIView):
 
     queryset = Professor.objects.all()
     serializer_class = ProfessorSerializer
+    lookup_field = 'tag'
 
 
 class ProfessorCreate(generics.CreateAPIView):
@@ -60,6 +61,7 @@ class TecnicoRetrieve(generics.RetrieveAPIView):
 
     queryset = Tecnico.objects.all()
     serializer_class = TecnicoSerializer
+    lookup_field = 'tag'
 
 
 class TecnicoCreate(generics.CreateAPIView):
@@ -101,6 +103,7 @@ class AlunoRetrieve(generics.RetrieveAPIView):
 
     queryset = Aluno.objects.all()
     serializer_class = AlunoSerializer
+    lookup_field = 'tag'
 
 
 class AlunoCreate(generics.CreateAPIView):
