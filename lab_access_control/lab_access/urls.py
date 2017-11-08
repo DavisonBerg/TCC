@@ -22,6 +22,8 @@ urlpatterns = [
     url(r'^alunos/update/(?P<pk>[0-9]+)/$', views.AlunoUpdate.as_view()),
     url(r'^alunos/delete/(?P<pk>[0-9]+)/$', views.AlunoDelete.as_view()),
 
+    url(r'^alunos/validate/(?P<tag>[a-z0-9]+)$', views.ValidateAluno.as_view()),
+
     url(r'^laboratorios/$',views.LaboratorioList.as_view()),
     url(r'^laboratorios/(?P<pk>[0-9]+)/$', views.LaboratorioRetrieve.as_view()),
     url(r'^laboratorios/create/$', views.LaboratorioCreate.as_view()),

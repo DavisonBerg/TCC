@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics
+from rest_framework.response import Response
 from lab_access.models import Aluno, Professor, Tecnico, Laboratorio, Bancada
 from lab_access.serializers import AlunoSerializer,ProfessorSerializer, TecnicoSerializer
 from lab_access.serializers import LaboratorioSerializer, BancadaSerializer
@@ -210,3 +211,12 @@ class BancadaDelete(generics.DestroyAPIView):
     """
     queryset = Bancada.objects.all()
     serializer_class = BancadaSerializer
+
+
+class ValidateAluno(generics.RetrieveAPIView):
+    """
+    Valida se um aluno tem permissão para lab, bancada e se tem um professor responsável
+    """
+    serializer_class = AlunoSerializer
+    lookup_field = 'tag'
+    queryset = Aluno.objects.filter(professor_responsavel__isnull=False, bancada__isnull=False, lab__isnull=False)
