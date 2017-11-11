@@ -5,17 +5,17 @@ from lab_access.models import Aluno, Professor, Tecnico, Laboratorio, Bancada
 from lab_access.serializers import AlunoSerializer,ProfessorSerializer, TecnicoSerializer
 from lab_access.serializers import LaboratorioSerializer, BancadaSerializer
 
-class ProfessorList(generics.ListAPIView):
+class ProfessorListCreate(generics.ListCreateAPIView):
     """
-    Lista de todos os professores
+    Lista todos os professores ou cria um novo professor
     """
     queryset = Professor.objects.all()
     serializer_class = ProfessorSerializer
 
 
-class ProfessorRetrieve(generics.RetrieveAPIView):
+class ProfessorView(generics.RetrieveUpdateDestroyAPIView):
     """
-    Consulta um professor
+    Consulta, atualiza ou deleta um professor
     """
 
     queryset = Professor.objects.all()
@@ -23,41 +23,17 @@ class ProfessorRetrieve(generics.RetrieveAPIView):
     lookup_field = 'tag'
 
 
-class ProfessorCreate(generics.CreateAPIView):
+class TecnicoListCreate(generics.ListCreateAPIView):
     """
-    Criar um novo professor
-    """
-    queryset = Professor.objects.all()
-    serializer_class = ProfessorSerializer
-
-
-class ProfessorUpdate(generics.UpdateAPIView):
-    """
-    Atualiza um professor
-    """
-    queryset = Professor.objects.all()
-    serializer_class = ProfessorSerializer
-
-
-class ProfessorDelete(generics.DestroyAPIView):
-    """
-    Apaga um professor
-    """
-    queryset = Professor.objects.all()
-    serializer_class = ProfessorSerializer
-
-
-class TecnicoList(generics.ListAPIView):
-    """
-    Lista de todos os técnicos
+    Lista todos os técnicos ou cria um novo técnico
     """
     queryset = Tecnico.objects.all()
     serializer_class = TecnicoSerializer
 
 
-class TecnicoRetrieve(generics.RetrieveAPIView):
+class TecnicoView(generics.RetrieveUpdateDestroyAPIView):
     """
-    Consulta um tecnico
+    Consulta, atualiza ou deleta um tecnico
     """
 
     queryset = Tecnico.objects.all()
@@ -65,41 +41,17 @@ class TecnicoRetrieve(generics.RetrieveAPIView):
     lookup_field = 'tag'
 
 
-class TecnicoCreate(generics.CreateAPIView):
+class AlunoListCreate(generics.ListCreateAPIView):
     """
-    Cria um novo técnico
-    """
-    queryset = Tecnico.objects.all()
-    serializer_class = TecnicoSerializer
-
-
-class TecnicoUpdate(generics.UpdateAPIView):
-    """
-    Atualiza um técnico
-    """
-    queryset = Tecnico.objects.all()
-    serializer_class = TecnicoSerializer
-
-
-class TecnicoDelete(generics.DestroyAPIView):
-    """
-    Apaga um técnico
-    """
-    queryset = Tecnico.objects.all()
-    serializer_class = TecnicoSerializer
-
-
-class AlunoList(generics.ListAPIView):
-    """
-    Lista de todos os alunos no laboratório
+    Lista todos os alunos ou cria um novo aluno
     """
     queryset = Aluno.objects.all()
     serializer_class = AlunoSerializer
 
 
-class AlunoRetrieve(generics.RetrieveAPIView):
+class AlunoView(generics.RetrieveUpdateDestroyAPIView):
     """
-    Consulta um Aluno
+    Consulta, atualiza ou deleta um Aluno
     """
 
     queryset = Aluno.objects.all()
@@ -107,108 +59,36 @@ class AlunoRetrieve(generics.RetrieveAPIView):
     lookup_field = 'tag'
 
 
-class AlunoCreate(generics.CreateAPIView):
+class LaboratorioListCreate(generics.ListCreateAPIView):
     """
-    Cria um novo aluno
-    """
-    queryset = Aluno.objects.all()
-    serializer_class = AlunoSerializer
-
-
-class AlunoUpdate(generics.UpdateAPIView):
-    """
-    Atualiza um novo aluno
-    """
-    queryset = Aluno.objects.all()
-    serializer_class = AlunoSerializer
-
-
-class AlunoDelete(generics.DestroyAPIView):
-    """
-    Apaga um aluno
-    """
-    queryset = Aluno.objects.all()
-    serializer_class = AlunoSerializer
-
-
-class LaboratorioList(generics.ListAPIView):
-    """
-    Lista todos os laboratórios do sistema
+    Lista todos os laboratórios ou cria um novo laboratório
     """
     queryset = Laboratorio.objects.all()
     serializer_class = LaboratorioSerializer
 
 
-class LaboratorioRetrieve(generics.RetrieveAPIView):
+class LaboratorioView(generics.RetrieveUpdateDestroyAPIView):
     """
-    Consulta um Laboratorio
+    Consulta, atualiza ou deleta um Laboratorio
     """
 
     queryset = Laboratorio.objects.all()
     serializer_class = LaboratorioSerializer
 
 
-class LaboratorioCreate(generics.CreateAPIView):
+class BancadaListCreate(generics.ListCreateAPIView):
     """
-    Cria um novo laboratório
-    """
-    queryset = Laboratorio.objects.all()
-    serializer_class = LaboratorioSerializer
-
-
-class LaboratorioUpdate(generics.UpdateAPIView):
-    """
-    Atualiza um Laboratorio
-    """
-    queryset = Laboratorio.objects.all()
-    serializer_class = LaboratorioSerializer
-
-
-class LaboratorioDelete(generics.DestroyAPIView):
-    """
-    Apaga um Laboratorio
-    """
-    queryset = Laboratorio.objects.all()
-    serializer_class = LaboratorioSerializer
-
-
-class BancadaList(generics.ListAPIView):
-    """
-    Lista todos as bancadas do sistema
+    Lista todos as bancadas ou cria uma nova bancada
     """
     queryset = Bancada.objects.all()
     serializer_class = BancadaSerializer
 
 
-class BancadaRetrieve(generics.RetrieveAPIView):
+class BancadaView(generics.RetrieveUpdateDestroyAPIView):
     """
-    Consulta uma Bancada
+    Consulta, atualiza ou deleta uma Bancada
     """
 
-    queryset = Bancada.objects.all()
-    serializer_class = BancadaSerializer
-
-
-class BancadaCreate(generics.CreateAPIView):
-    """
-    Cria uma nova Bancada
-    """
-    queryset = Bancada.objects.all()
-    serializer_class = BancadaSerializer
-
-
-class BancadaUpdate(generics.UpdateAPIView):
-    """
-    Atualiza uma Bancada
-    """
-    queryset = Bancada.objects.all()
-    serializer_class = BancadaSerializer
-
-
-class BancadaDelete(generics.DestroyAPIView):
-    """
-    Apaga uma Bancada
-    """
     queryset = Bancada.objects.all()
     serializer_class = BancadaSerializer
 
