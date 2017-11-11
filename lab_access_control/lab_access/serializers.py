@@ -5,28 +5,28 @@ from lab_access.models import Aluno, Professor, Tecnico, Laboratorio, Bancada
 class ProfessorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Professor
-        fields = ('id','nome','cpf','tag')
+        fields = ('__all__')
 
 
 class TecnicoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tecnico
-        fields = ('id','nome','cpf','tag')
+        fields = ('__all__')
 
 
 class AlunoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Aluno
-        fields = ('id','nome','cpf','tag', 'lab', 'bancada', 'hora_inicio', 'hora_fim', 'professor_responsavel')
+        fields = ('__all__')
 
 
 class LaboratorioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Laboratorio
-        fields = ('id','nome')
+        fields = ('__all__')
 
 
 class BancadaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bancada
-        fields = ('id', 'numero', 'lab')
+        fields = ('__all__')
