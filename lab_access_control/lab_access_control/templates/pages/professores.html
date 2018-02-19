@@ -30,7 +30,7 @@
             <tbody>
               {% for professor in professores %}
                 <tr>
-                  <td><a type="button" class="btn btn-default" href="" id="professor-details">Detalhes</a></td>
+                  <td><a type="button" class="btn btn-default" href="{% url 'professor-detail' pk=professor.pk %}" id="professor-details">Detalhes</a></td>
                   <td>{{professor.nome}}</td>
                   <td>{{professor.cpf}}</td>
                   <td>{{professor.tag}}</td>

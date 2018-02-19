@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -112,3 +112,40 @@ class ProfessorViewHTML(APIView):
     def get(self, request):
         queryset = Professor.objects.all()
         return Response({'title': 'Professores', 'professores': queryset})
+
+
+class ProfessorDetail(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name='pages/professor-details.html'
+
+    def get(self, request, pk):
+        professor = get_object_or_404(Professor, pk=pk)
+        serializer = ProfessorSerializer(professor)
+
+        url_redirect = 'professores'
+        return Response({'serializer': serializer, 'professor': professor, 'url_redirect': url_redirect})
+
+    def post(self, request, pk):
+        professor = get_object_or_404(Professor, pk=pk)
+        serializer = ProfessorSerializer(professor, data=request.data)
+        if not serializer.is_valid():
+            return Response({'serializer': serializer, 'professor': professor})
+        serializer.save()
+        return redirect('professores')
+
+
+# class ComponenteNew(APIView):
+#     renderer_classes = [TemplateHTMLRenderer]
+#     template_name='pages/componente-new.html'
+
+#     def get(self, request, *args, **kwargs):
+#         serializer = ComponenteSerializer()
+#         return Response({'serializer': serializer, 'url': reverse('componente_new'), 'url_redirect': 'home'})
+
+#     def post(self, request, *args, **kwargs):
+#         componente = Componente()
+#         serializer = ComponenteSerializer(componente, data=request.data)
+#         if not serializer.is_valid():
+#             return Response({'serializer': serializer, 'componente': componente})
+#         serializer.save()
+#         return redirect('home')

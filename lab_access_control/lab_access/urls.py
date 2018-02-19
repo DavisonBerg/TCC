@@ -5,8 +5,9 @@ from lab_access import views
 
 urlpatterns = [
     # url(r'^professores/$',views.ProfessorListCreate.as_view()),
-    url(r'^professores/(?P<tag>[a-z0-9]+)/$', views.ProfessorView.as_view()),
+    # url(r'^professores/(?P<tag>[a-z0-9]+)/$', views.ProfessorView.as_view()),
     url(r'^professores/$', views.ProfessorViewHTML.as_view(), name='professores'),
+    url(r'^professores/(?P<pk>[0-9]+)/$', views.ProfessorDetail.as_view(), name='professor-detail'),
 
     url(r'^tecnicos/$',views.TecnicoListCreate.as_view()),
     url(r'^tecnicos/(?P<tag>[a-z0-9]+)/$', views.TecnicoView.as_view()),
