@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% load static i18n %}
+{% block css %}
+{{ block.super }}
+  <link href="{% static 'css/dataTables.bootstrap.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+<div class="right_col" role="main">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Caderneta</h2>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <label for="data_caderneta">Data: </label>
+            <input id="data_caderneta" name="data_caderneta" class="datepicker"></input>
+          </div>
+        <div class="x_content">
+          <table id="classes-datatable" class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Classe</th>
+                <th>Presentes</th>
+                <th>Visitantes</th>
+                <th>Bíblias</th>
+                <th>Matriculados</th>
+                <th>Professor</th>
+                <th>Adjuntos</th>
+                <th>Atendimento</th>
+                <th>Frequência</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for classe in classes %}
+                <tr>
+                  <td>{{ caderneta.classe.numero }}</td>
+                  <td>{{ caderneta.presentes }}</td>
+                  <td>{{ caderneta.visitantes }}</td>
+                  <td>{{ caderneta.biblias }}</td>
+                  <td>{{ caderneta.matriculados }}</td>
+                  <td>{{ caderneta.professor }}</td>
+                  <td>{{ caderneta.adjuntos }}</td>
+                  <td>{{ caderneta.atendimento }}</td>
+                  <td>{{ caderneta.frequencia }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block javascript %}
+{{ block.super }}
+  <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+  <script src="{% static 'js/classes.js' %}"></script>
+{% endblock javascript %}

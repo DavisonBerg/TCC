@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.renderers import TemplateHTMLRenderer
+from rest_framework.reverse import reverse
 from lab_access.models import Aluno, Professor, Tecnico, Laboratorio, Bancada
 from lab_access.serializers import AlunoSerializer,ProfessorSerializer, TecnicoSerializer
 from lab_access.serializers import LaboratorioSerializer, BancadaSerializer
@@ -100,3 +103,12 @@ class ValidateAluno(generics.RetrieveAPIView):
     serializer_class = AlunoSerializer
     lookup_field = 'tag'
     queryset = Aluno.objects.filter(professor_responsavel__isnull=False, bancada__isnull=False, lab__isnull=False)
+
+
+class ProfessorViewHTML(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'pages/professores.html'
+
+    def get(self, request):
+        queryset = Professor.objects.all()
+        return Response({'title': 'Professores', 'professores': queryset})

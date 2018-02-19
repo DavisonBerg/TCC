@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% load static i18n %}
+{% load rest_framework %}
+{% block css %}
+{{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="right_col" role="main">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+            <h2>Classe</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <br />
+          <form method="POST" id="classe-form" action="{% url 'classe-detail' pk=classe.pk %}" data-parsley-validate class="form-horizontal form-label-left">
+              {% render_form serializer template_pack='rest_framework/horizontal' %}
+            
+            <div class="ln_solid"></div>
+            <h4>Professores</h4>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">Professor:</label>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ classe.professor.nome }}</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Adjuntos:</label>
+                {% for adjunto in classe.adjuntos %}
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ adjunto.nome }}{% if not forloop.last %},{% endif %}</label>
+                {% endfor %}
+              </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
+                <a class="btn btn-primary" type="button" href="{% url 'classes' %}">Cancelar</a>
+                <button id="classe-save" type="submit" class="btn btn-success">Salvar</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load static i18n %}
+{% load rest_framework %}
+{% block css %}
+{{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="right_col" role="main">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+            <h2>Componente</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <br />
+          <form method="POST" id="componente-form" action="{% url 'componente-detail' pk=componente.pk %}" data-parsley-validate class="form-horizontal form-label-left">
+              {% render_form serializer template_pack='rest_framework/horizontal' %}
+
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
+                <a class="btn btn-primary" type="button" href="{% url url_redirect %}">Cancelar</a>
+                <button id="componente-save" type="submit" class="btn btn-success">Salvar</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
