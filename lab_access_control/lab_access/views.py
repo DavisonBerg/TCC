@@ -149,3 +149,49 @@ class ProfessorNew(APIView):
             return Response({'serializer': serializer, 'professor': professor})
         serializer.save()
         return redirect('professores')
+
+
+class AlunosViewHTML(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'pages/alunos.html'
+
+    def get(self, request):
+        queryset = Aluno.objects.all()
+        return Response({'title': 'Alunos', 'alunos': queryset})
+
+
+class AlunoDetail(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name='pages/aluno-details.html'
+
+    def get(self, request, pk):
+        aluno = get_object_or_404(Aluno, pk=pk)
+        serializer = AlunoSerializer(aluno)
+
+        url_redirect = 'alunos'
+        return Response({'serializer': serializer, 'aluno': aluno, 'url_redirect': url_redirect})
+
+    def post(self, request, pk):
+        aluno = get_object_or_404(Aluno, pk=pk)
+        serializer = AlunoSerializer(aluno, data=request.data)
+        if not serializer.is_valid():
+            return Response({'serializer': serializer, 'aluno': aluno})
+        serializer.save()
+        return redirect('alunos')
+
+
+class AlunoNew(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name='pages/aluno-new.html'
+
+    def get(self, request, *args, **kwargs):
+        serializer = AlunoSerializer()
+        return Response({'serializer': serializer, 'url': reverse('aluno_new'), 'url_redirect': 'alunos'})
+
+    def post(self, request, *args, **kwargs):
+        aluno = Aluno()
+        serializer = AlunoSerializer(professor, data=request.data)
+        if not serializer.is_valid():
+            return Response({'serializer': serializer, 'aluno': aluno})
+        serializer.save()
+        return redirect('alunos')

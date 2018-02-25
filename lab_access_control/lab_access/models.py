@@ -9,6 +9,13 @@ from django.db import models
 class Laboratorio(models.Model):
     nome = models.TextField()
 
+    def __unicode__(self):
+        return '%s' % self.nome
+
+    def __str__(self):
+        return '%s' % self.nome
+
+
     class Meta:
         ordering = ('nome',)
 
@@ -16,6 +23,13 @@ class Laboratorio(models.Model):
 class Bancada(models.Model):
     numero = models.IntegerField()
     lab = models.ForeignKey('Laboratorio')
+
+    def __unicode__(self):
+        return 'Lab %s - Bancada %s' % (self.lab.nome, self.numero)
+
+    def __str__(self):
+        return 'Lab %s - Bancada %s' % (self.lab.nome, self.numero)
+
 
     class Meta:
         ordering = ('numero',)
@@ -28,6 +42,12 @@ class Professor(models.Model):
     nome = models.TextField()
     cpf = models.IntegerField()
     tag = models.TextField()
+
+    def __unicode__(self):
+        return '%s' % self.nome
+
+    def __str__(self):
+        return '%s' % self.nome
 
     class Meta:
         ordering = ('nome',)
@@ -50,7 +70,7 @@ class Aluno(models.Model):
     bancada = models.ForeignKey('Bancada', blank=True, null=True)
     hora_inicio = models.DateTimeField(blank=True, null=True)
     hora_fim = models.DateTimeField(blank=True, null=True)
-    professor_responsavel = models.ForeignKey('Professor', blank=True, null=True)
+    professor_responsavel = models.ForeignKey(to='Professor', blank=True, null=True)
 
     class Meta:
         ordering = ('nome',)
