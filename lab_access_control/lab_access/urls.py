@@ -8,6 +8,7 @@ urlpatterns = [
     # url(r'^professores/(?P<tag>[a-z0-9]+)/$', views.ProfessorView.as_view()),
     url(r'^professores/$', views.ProfessorViewHTML.as_view(), name='professores'),
     url(r'^professores/(?P<pk>[0-9]+)/$', views.ProfessorDetail.as_view(), name='professor-detail'),
+    url(r'^professores/novo/$', views.ProfessorNew.as_view(), name='professor_new'),
 
     url(r'^tecnicos/$',views.TecnicoListCreate.as_view()),
     url(r'^tecnicos/(?P<tag>[a-z0-9]+)/$', views.TecnicoView.as_view()),

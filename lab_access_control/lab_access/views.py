@@ -134,18 +134,18 @@ class ProfessorDetail(APIView):
         return redirect('professores')
 
 
-# class ComponenteNew(APIView):
-#     renderer_classes = [TemplateHTMLRenderer]
-#     template_name='pages/componente-new.html'
+class ProfessorNew(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name='pages/professor-new.html'
 
-#     def get(self, request, *args, **kwargs):
-#         serializer = ComponenteSerializer()
-#         return Response({'serializer': serializer, 'url': reverse('componente_new'), 'url_redirect': 'home'})
+    def get(self, request, *args, **kwargs):
+        serializer = ProfessorSerializer()
+        return Response({'serializer': serializer, 'url': reverse('professor_new'), 'url_redirect': 'professores'})
 
-#     def post(self, request, *args, **kwargs):
-#         componente = Componente()
-#         serializer = ComponenteSerializer(componente, data=request.data)
-#         if not serializer.is_valid():
-#             return Response({'serializer': serializer, 'componente': componente})
-#         serializer.save()
-#         return redirect('home')
+    def post(self, request, *args, **kwargs):
+        professor = Professor()
+        serializer = ProfessorSerializer(professor, data=request.data)
+        if not serializer.is_valid():
+            return Response({'serializer': serializer, 'professor': professor})
+        serializer.save()
+        return redirect('professores')
