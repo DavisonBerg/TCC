@@ -4,44 +4,26 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.reverse import reverse
-from lab_access.models import Aluno, Professor, Tecnico, Laboratorio, Bancada
-from lab_access.serializers import AlunoSerializer,ProfessorSerializer, TecnicoSerializer
-from lab_access.serializers import LaboratorioSerializer, BancadaSerializer
+from lab_access.models import Aluno, Laboratorio, Bancada, Usuario
+from lab_access.serializers import AlunoSerializer
+from lab_access.serializers import LaboratorioSerializer, BancadaSerializer, UsuarioSerializer
 
-class ProfessorListCreate(generics.ListCreateAPIView):
+
+class UsuarioListCreate(generics.ListCreateAPIView):
     """
-    Lista todos os professores ou cria um novo professor
+    Lista todos os usuarios ou cria um novo usuario
     """
-    queryset = Professor.objects.all()
-    serializer_class = ProfessorSerializer
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioSerializer
 
 
-class ProfessorView(generics.RetrieveUpdateDestroyAPIView):
+class UsuarioView(generics.RetrieveUpdateDestroyAPIView):
     """
-    Consulta, atualiza ou deleta um professor
-    """
-
-    queryset = Professor.objects.all()
-    serializer_class = ProfessorSerializer
-    lookup_field = 'tag'
-
-
-class TecnicoListCreate(generics.ListCreateAPIView):
-    """
-    Lista todos os técnicos ou cria um novo técnico
-    """
-    queryset = Tecnico.objects.all()
-    serializer_class = TecnicoSerializer
-
-
-class TecnicoView(generics.RetrieveUpdateDestroyAPIView):
-    """
-    Consulta, atualiza ou deleta um tecnico
+    Consulta, atualiza ou deleta um usuario
     """
 
-    queryset = Tecnico.objects.all()
-    serializer_class = TecnicoSerializer
-    lookup_field = 'tag'
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioSerializer
 
 
 class AlunoListCreate(generics.ListCreateAPIView):
@@ -95,7 +77,7 @@ class BancadaView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Bancada.objects.all()
     serializer_class = BancadaSerializer
 
-
+'''
 class ValidateAluno(generics.RetrieveAPIView):
     """
     Valida se um aluno tem permissão para lab, bancada e se tem um professor responsável
@@ -103,52 +85,7 @@ class ValidateAluno(generics.RetrieveAPIView):
     serializer_class = AlunoSerializer
     lookup_field = 'tag'
     queryset = Aluno.objects.filter(professor_responsavel__isnull=False, bancada__isnull=False, lab__isnull=False)
-
-
-class ProfessorViewHTML(APIView):
-    renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'pages/professores.html'
-
-    def get(self, request):
-        queryset = Professor.objects.all()
-        return Response({'title': 'Professores', 'professores': queryset})
-
-
-class ProfessorDetail(APIView):
-    renderer_classes = [TemplateHTMLRenderer]
-    template_name='pages/professor-details.html'
-
-    def get(self, request, pk):
-        professor = get_object_or_404(Professor, pk=pk)
-        serializer = ProfessorSerializer(professor)
-
-        url_redirect = 'professores'
-        return Response({'serializer': serializer, 'professor': professor, 'url_redirect': url_redirect})
-
-    def post(self, request, pk):
-        professor = get_object_or_404(Professor, pk=pk)
-        serializer = ProfessorSerializer(professor, data=request.data)
-        if not serializer.is_valid():
-            return Response({'serializer': serializer, 'professor': professor})
-        serializer.save()
-        return redirect('professores')
-
-
-class ProfessorNew(APIView):
-    renderer_classes = [TemplateHTMLRenderer]
-    template_name='pages/professor-new.html'
-
-    def get(self, request, *args, **kwargs):
-        serializer = ProfessorSerializer()
-        return Response({'serializer': serializer, 'url': reverse('professor_new'), 'url_redirect': 'professores'})
-
-    def post(self, request, *args, **kwargs):
-        professor = Professor()
-        serializer = ProfessorSerializer(professor, data=request.data)
-        if not serializer.is_valid():
-            return Response({'serializer': serializer, 'professor': professor})
-        serializer.save()
-        return redirect('professores')
+'''
 
 
 class AlunosViewHTML(APIView):
@@ -190,8 +127,81 @@ class AlunoNew(APIView):
 
     def post(self, request, *args, **kwargs):
         aluno = Aluno()
-        serializer = AlunoSerializer(professor, data=request.data)
+        serializer = AlunoSerializer(usuario, data=request.data)
         if not serializer.is_valid():
             return Response({'serializer': serializer, 'aluno': aluno})
         serializer.save()
         return redirect('alunos')
+
+
+class UsuariosViewHTML(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'pages/usuarios.html'
+
+    def get(self, request):
+        queryset = Usuario.objects.all()
+        return Response({'title': 'Usuarios', 'usuarios': queryset})
+
+
+class UsuarioDetail(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name='pages/usuario-details.html'
+
+    def get(self, request, pk):
+        usuario = get_object_or_404(Usuario, pk=pk)
+        serializer = UsuarioSerializer(usuario)
+
+        url_redirect = 'usuarios'
+        if usuario.tipo == 'professor':
+            url_redirect = 'professores'
+        elif usuario.tipo == 'tecnico':
+            url_redirect = 'tecnicos'
+        return Response({'serializer': serializer, 'usuario': usuario, 'url_redirect': url_redirect})
+
+    def post(self, request, pk):
+        usuario = get_object_or_404(Usuario, pk=pk)
+        serializer = UsuarioSerializer(usuario, data=request.data)
+        if not serializer.is_valid():
+            return Response({'serializer': serializer, 'usuario': usuario})
+        serializer.save()
+        if usuario.tipo == 'professor':
+            return redirect('professores')
+        elif usuario.tipo == 'tecnico':
+            return redirect('tecnicos')
+        else:
+            return redirect('usuarios')
+
+
+class UsuarioNew(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name='pages/usuario-new.html'
+
+    def get(self, request, *args, **kwargs):
+        serializer = UsuarioSerializer()
+        return Response({'serializer': serializer, 'url': reverse('usuario_new'), 'url_redirect': 'usuarios'})
+
+    def post(self, request, *args, **kwargs):
+        usuario = Usuario()
+        serializer = UsuarioSerializer(usuario, data=request.data)
+        if not serializer.is_valid():
+            return Response({'serializer': serializer, 'usuario': usuario})
+        serializer.save()
+        return redirect('usuarios')
+
+
+class ProfessorViewHTML(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'pages/usuarios.html'
+
+    def get(self, request):
+        queryset = Usuario.objects.filter(tipo__in=[Usuario.PROFESSOR])
+        return Response({'title': 'Professores', 'usuarios': queryset})
+
+
+class TecnicoViewHTML(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'pages/usuarios.html'
+
+    def get(self, request):
+        queryset = Usuario.objects.filter(tipo__in=[Usuario.TECNICO])
+        return Response({'title': 'Tecnicos', 'usuarios': queryset})

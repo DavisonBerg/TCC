@@ -4,18 +4,18 @@ from lab_access import views
 
 
 urlpatterns = [
-    url(r'^api/professores/$',views.ProfessorListCreate.as_view()),
-    url(r'^api/professores/(?P<tag>[a-z0-9]+)/$', views.ProfessorView.as_view()),
-    url(r'^professores/$', views.ProfessorViewHTML.as_view(), name='professores'),
-    url(r'^professores/(?P<pk>[0-9]+)/$', views.ProfessorDetail.as_view(), name='professor-detail'),
-    url(r'^professores/novo/$', views.ProfessorNew.as_view(), name='professor_new'),
 
-    url(r'^api/tecnicos/$',views.TecnicoListCreate.as_view()),
-    url(r'^api/tecnicos/(?P<tag>[a-z0-9]+)/$', views.TecnicoView.as_view()),
+    url(r'^api/usuarios/$',views.UsuarioListCreate.as_view()),
+    url(r'^api/usuarios/(?P<pk>[0-9]+)/$', views.UsuarioView.as_view()),
+    url(r'^usuarios/$', views.UsuariosViewHTML.as_view(), name='usuarios'),
+    url(r'^usuarios/(?P<pk>[0-9]+)/$', views.UsuarioDetail.as_view(), name='usuario-detail'),
+    url(r'^usuarios/novo/$', views.UsuarioNew.as_view(), name='usuario_new'),
+    url(r'^professores/$', views.ProfessorViewHTML.as_view(), name='professores'),
+    url(r'^tecnicos/$', views.TecnicoViewHTML.as_view(), name='tecnicos'),
 
     url(r'^api/alunos/$',views.AlunoListCreate.as_view()),
     url(r'^api/alunos/(?P<tag>[a-z0-9]+)/$', views.AlunoView.as_view()),
-    url(r'^api/alunos/validate/(?P<tag>[a-z0-9]+)$', views.ValidateAluno.as_view()),
+#    url(r'^api/alunos/validate/(?P<tag>[a-z0-9]+)$', views.ValidateAluno.as_view()),
     url(r'^alunos/$', views.AlunosViewHTML.as_view(), name='alunos'),
     url(r'^alunos/(?P<pk>[0-9]+)/$', views.AlunoDetail.as_view(), name='aluno-detail'),
     url(r'^alunos/novo/$', views.AlunoNew.as_view(), name='aluno_new'),

@@ -1,16 +1,9 @@
 from rest_framework import serializers
-from lab_access.models import Aluno, Professor, Tecnico, Laboratorio, Bancada
+from lab_access.models import Aluno, Laboratorio, Bancada, Usuario
 
-
-class ProfessorSerializer(serializers.ModelSerializer):
+class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Professor
-        fields = ('__all__')
-
-
-class TecnicoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tecnico
+        model = Usuario
         fields = ('__all__')
 
 

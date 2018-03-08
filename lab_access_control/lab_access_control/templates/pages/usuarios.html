@@ -17,7 +17,7 @@
           <div class="clearfix"></div>
         </div>
         <div class="x_content">
-          <table id="alunos-datatable" class="table table-striped table-bordered">
+          <table id="dirigentes-datatable" class="table table-striped table-bordered">
             <thead>
               <tr>
                 <th></th>
@@ -28,12 +28,12 @@
             </thead>
 
             <tbody>
-              {% for aluno in alunos %}
+              {% for usuario in usuarios %}
                 <tr>
-                  <td><a type="button" class="btn btn-default" href="{% url 'aluno-detail' pk=aluno.pk %}" id="aluno-details">Detalhes</a></td>
-                  <td>{{aluno.nome}}</td>
-                  <td>{{aluno.cpf}}</td>
-                  <td>{{aluno.tag}}</td>
+                  <td><a type="button" class="btn btn-default" href="{% url 'usuario-detail' pk=usuario.pk %}" id="usuario-details">Detalhes</a></td>
+                  <td>{{usuario.nome}}</td>
+                  <td>{{usuario.cpf}}</td>
+                  <td>{{usuario.tag}}</td>
                 </tr>
               {% endfor %}
             </tbody>
@@ -41,7 +41,7 @@
           </table>
         </div>
         <div>
-          <a type="button" class="btn btn-primary" href="{% url 'aluno_new' %}" id="novo-aluno">Novo</a>
+          <a type="button" class="btn btn-primary" href="{% url 'usuario_new' %}" id="novo-usuario">Novo</a>
         </div>
       </div>
     </div>
@@ -53,5 +53,5 @@
 {{ block.super }}
   <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
   <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
-  <script src="{% static 'js/componentes.js' %}"></script>
+  <script src="{% static 'js/usuarios.js' %}"></script>
 {% endblock javascript %}
