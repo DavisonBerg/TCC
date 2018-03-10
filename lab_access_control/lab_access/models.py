@@ -35,13 +35,22 @@ class Bancada(models.Model):
         ordering = ('numero',)
 
 
-class Professor(models.Model):
+class Usuario(models.Model):
     '''
-    Classe Professor
+    Classe Usuário
     '''
     nome = models.TextField()
     cpf = models.IntegerField()
     tag = models.TextField()
+
+    class Meta:
+        ordering = ('nome',)
+
+
+class Professor(Usuario):
+    '''
+    Classe Professor
+    '''
 
     def __unicode__(self):
         return '%s' % self.nome
@@ -53,19 +62,13 @@ class Professor(models.Model):
         ordering = ('nome',)
 
 
-class Tecnico(models.Model):
-    nome = models.TextField()
-    cpf = models.IntegerField()
-    tag = models.TextField()
+class Tecnico(Usuario):
 
     class Meta:
         ordering = ('nome',)
 
 
-class Aluno(models.Model):
-    nome = models.TextField()
-    cpf = models.IntegerField()
-    tag = models.TextField()
+class Aluno(Usuario):
     lab = models.ForeignKey('Laboratorio', blank=True, null=True)
     bancada = models.ForeignKey('Bancada', blank=True, null=True)
     hora_inicio = models.DateTimeField(blank=True, null=True)
