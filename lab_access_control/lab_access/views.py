@@ -4,9 +4,27 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.reverse import reverse
-from lab_access.models import Aluno, Professor, Tecnico, Laboratorio, Bancada
-from lab_access.serializers import AlunoSerializer,ProfessorSerializer, TecnicoSerializer
+from lab_access.models import Usuario, Aluno, Professor, Tecnico, Laboratorio, Bancada
+from lab_access.serializers import UsuarioSerializer, AlunoSerializer, ProfessorSerializer, TecnicoSerializer
 from lab_access.serializers import LaboratorioSerializer, BancadaSerializer
+
+class UsuarioListCreate(generics.ListCreateAPIView):
+    """
+    Lista todos os usuarios ou cria um novo usuario
+    """
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioSerializer
+
+
+class UsuarioView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Consulta, atualiza ou deleta um usuario
+    """
+
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioSerializer
+    lookup_field = 'tag'
+
 
 class ProfessorListCreate(generics.ListCreateAPIView):
     """
