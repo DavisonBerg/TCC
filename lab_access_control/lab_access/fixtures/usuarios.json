@@ -1,0 +1,47 @@
+[
+    {
+        "fields": {
+            "nome": "Marcos",
+            "cpf": "0898772",
+            "tag": "111333"
+        },
+        "model": "lab_access.usuario",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "nome": "Matheus",
+            "cpf": "123123321321",
+            "tag": "11222"
+        },
+        "model": "lab_access.usuario",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "nome": "Levi",
+            "cpf": "12",
+            "tag": "333"
+        },
+        "model": "lab_access.usuario",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "nome": "Felipe",
+            "cpf": "13",
+            "tag": "444"
+        },
+        "model": "lab_access.usuario",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "nome": "Bruno",
+            "cpf": "14",
+            "tag": "555"
+        },
+        "model": "lab_access.usuario",
+        "pk": 5
+    }
+]
