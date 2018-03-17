@@ -8,6 +8,34 @@ from lab_access.models import Aluno, Professor, Tecnico, Laboratorio, Bancada
 from lab_access.serializers import AlunoSerializer,ProfessorSerializer, TecnicoSerializer
 from lab_access.serializers import LaboratorioSerializer, BancadaSerializer
 
+
+class RetrieveAll(generics.RetrieveAPIView):
+    """
+    Get any person by tag
+    """
+    def get(self, request, tag):
+        try:
+            professor = get_object_or_404(Professor, tag=tag)
+            if professor:
+                serializer = ProfessorSerializer(professor)
+        except:
+            pass
+        try:
+            aluno = get_object_or_404(Aluno, tag=tag)
+            if aluno:
+                serializer = AlunoSerializer(aluno)
+        except:
+            pass
+        try:
+            tecnico = get_object_or_404(Tecnico, tag=tag)
+            if tecnico:
+                serializer = TecnicoSerializer(tecnico)
+        except:
+            pass
+
+        return Response(serializer.data)
+
+
 class ProfessorListCreate(generics.ListCreateAPIView):
     """
     Lista todos os professores ou cria um novo professor
