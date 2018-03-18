@@ -25,6 +25,8 @@ urlpatterns = [
 
     url(r'^api/bancadas/$',views.BancadaListCreate.as_view()),
     url(r'^api/bancadas/(?P<pk>[0-9]+)/$', views.BancadaView.as_view()),
+
+    url(r'^api/search/(?P<tag>[a-z0-9]+)/$', views.RetrieveAll.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -1,12 +1,44 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from rest_framework import generics
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.reverse import reverse
 from lab_access.models import Aluno, Professor, Tecnico, Laboratorio, Bancada
-from lab_access.serializers import AlunoSerializer,ProfessorSerializer, TecnicoSerializer
+from lab_access.serializers import AlunoSerializer, ProfessorSerializer, TecnicoSerializer
 from lab_access.serializers import LaboratorioSerializer, BancadaSerializer
+
+
+class RetrieveAll(generics.RetrieveAPIView):
+    """
+    Get any person by tag
+    """
+    def get(self, request, tag):
+        try:
+            professor = get_object_or_404(Professor, tag=tag)
+            if professor:
+                serializer = ProfessorSerializer(professor)
+                return Response(serializer.data)
+        except:
+            pass
+        try:
+            aluno = get_object_or_404(Aluno, tag=tag)
+            if aluno:
+                serializer = AlunoSerializer(aluno)
+                return Response(serializer.data)
+        except:
+            pass
+        try:
+            tecnico = get_object_or_404(Tecnico, tag=tag)
+            if tecnico:
+                serializer = TecnicoSerializer(tecnico)
+                return Response(serializer.data)
+        except:
+            pass
+
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
 
 class ProfessorListCreate(generics.ListCreateAPIView):
     """
