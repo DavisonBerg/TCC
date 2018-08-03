@@ -12,6 +12,9 @@ urlpatterns = [
 
     url(r'^api/tecnicos/$',views.TecnicoListCreate.as_view()),
     url(r'^api/tecnicos/(?P<tag>[a-z0-9]+)/$', views.TecnicoView.as_view()),
+    url(r'^tecnicos/$', views.TecnicoViewHTML.as_view(), name='tecnicos'),
+    url(r'^tecnicos/(?P<pk>[0-9]+)/$', views.TecnicoDetail.as_view(), name='tecnico-detail'),
+    url(r'^tecnicos/novo/$', views.TecnicoNew.as_view(), name='tecnico_new'),
 
     url(r'^api/alunos/$',views.AlunoListCreate.as_view()),
     url(r'^api/alunos/(?P<tag>[a-z0-9]+)/$', views.AlunoView.as_view()),

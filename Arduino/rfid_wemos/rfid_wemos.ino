@@ -29,12 +29,12 @@ MFRC522 readerRFID(SS_PIN, RST_PIN);   // Cria instância com MFRC522
  
 
 // --- Variáveis Globais --- 
-const char* ssid     = "Nome da Rede";
-const char* password = "Senha";
+const char* ssid     = "GVT-D60B";
+const char* password = "4003000254";
 const int http_port = 80;
 WiFiClient eclient;
 
-const char* server = "URL do webservice";
+const char* server = "http://davison.pythonanywhere.com";
 const unsigned long HTTP_TIMEOUT = 10000;  // max respone time from server
 const size_t MAX_CONTENT_SIZE = 300;       // max size of the HTTP response
 String tagID;
@@ -101,7 +101,7 @@ void loop()
   
   Serial.print("UID size : ");
   Serial.println(readerRFID.uid.size);
-  
+  tagID = ""; 
   for (int i = 0; i <= readerRFID.uid.size; i++) 
   {
     tagID.concat(String(readerRFID.uid.uidByte[i], HEX));
@@ -162,7 +162,7 @@ void denied(){
 
 bool sendRequest(const char* host,String tagID) {
   HTTPClient http;
-  http.begin("URL do webservice"+tagID+"/");
+  http.begin("http://davison.pythonanywhere.com/api/search/"+tagID+"/");
   int httpCode = http.GET();
   UserData userData;
   if(httpCode){

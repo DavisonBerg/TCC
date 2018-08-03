@@ -182,6 +182,48 @@ class ProfessorNew(APIView):
         serializer.save()
         return redirect('professores')
 
+class TecnicoViewHTML(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'pages/tecnicos.html'
+
+    def get(self, request):
+        queryset = Tecnico.objects.all()
+        return Response({'title': 'Tecnicos', 'tecnicos': queryset})
+
+class TecnicoDetail(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name='pages/tecnico-details.html'
+
+    def get(self, request, pk):
+        tecnico = get_object_or_404(Tecnico, pk=pk)
+        serializer = TecnicoSerializer(tecnico)
+
+        url_redirect = 'tecnicos'
+        return Response({'serializer': serializer, 'tecnico': tecnico, 'url_redirect': url_redirect})
+
+    def post(self, request, pk):
+        tecnico = get_object_or_404(Tecnico, pk=pk)
+        serializer = TecnicoSerializer(tecnico, data=request.data)
+        if not serializer.is_valid():
+            return Response({'serializer': serializer, 'tecnico': tecnico})
+        serializer.save()
+        return redirect('tecnicos')
+
+class TecnicoNew(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name='pages/tecnico-new.html'
+
+    def get(self, request, *args, **kwargs):
+        serializer = TecnicoSerializer()
+        return Response({'serializer': serializer, 'url': reverse('tecnico_new'), 'url_redirect': 'tecnicos'})
+
+    def post(self, request, *args, **kwargs):
+        tecnico = Tecnico()
+        serializer = TecnicoSerializer(tecnico, data=request.data)
+        if not serializer.is_valid():
+            return Response({'serializer': serializer, 'tecnico': tecnico})
+        serializer.save()
+        return redirect('tecnicos')
 
 class AlunosViewHTML(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -222,7 +264,7 @@ class AlunoNew(APIView):
 
     def post(self, request, *args, **kwargs):
         aluno = Aluno()
-        serializer = AlunoSerializer(professor, data=request.data)
+        serializer = AlunoSerializer(aluno, data=request.data)
         if not serializer.is_valid():
             return Response({'serializer': serializer, 'aluno': aluno})
         serializer.save()

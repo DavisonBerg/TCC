@@ -58,6 +58,13 @@ class Tecnico(models.Model):
     cpf = models.IntegerField()
     tag = models.TextField()
 
+
+    def __unicode__(self):
+        return '%s' % self.nome
+
+    def __str__(self):
+        return '%s' % self.nome
+
     class Meta:
         ordering = ('nome',)
 
