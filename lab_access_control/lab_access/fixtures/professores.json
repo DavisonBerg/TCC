@@ -2,6 +2,7 @@
     {
         "fields": {
             "nome": "João",
+            "tipo": "Professor",
             "cpf": "91678217255",
             "tag": "111"
         },
@@ -11,6 +12,7 @@
     {
         "fields": {
             "nome": "José",
+            "tipo": "Professor",
             "cpf": "36546008127",
             "tag": "112"
         },

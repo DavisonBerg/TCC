@@ -2,6 +2,7 @@
     {
         "fields": {
             "nome": "Menino da TI",
+            "tipo": "Tecnico",
             "cpf": "58956555672",
             "tag": "11"
         },
@@ -11,6 +12,7 @@
     {
         "fields": {
             "nome": "Gabriel",
+            "tipo": "Tecnico",
             "cpf": "64570839914",
             "tag": "12"
         },

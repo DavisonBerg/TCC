@@ -1,7 +1,8 @@
 [
     {
         "fields": {
-            "nome": "Davison",
+            "nome":  "Davison",
+            "tipo": "Aluno",
             "cpf": "76945671350",
             "tag": "a0349535",
             "lab": 1,
@@ -16,6 +17,7 @@
     {
         "fields": {
             "nome": "José",
+            "tipo": "Aluno",
             "cpf": "74930879254",
             "tag": "122",
             "lab": 1,
@@ -30,6 +32,7 @@
     {
         "fields": {
             "nome": "Maria",
+            "tipo": "Aluno",
             "cpf": "36374814412",
             "tag": "123",
             "lab": 2,
@@ -44,6 +47,7 @@
     {
         "fields": {
             "nome": "Fulano",
+            "tipo": "Aluno",
             "cpf": "68699994463",
             "tag": "124",
             "lab": null,
@@ -58,6 +62,7 @@
     {
         "fields": {
             "nome": "Anderson",
+            "tipo": "Aluno",
             "cpf": "79701219288",
             "tag": "f5f788",
             "lab": null,

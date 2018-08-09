@@ -42,6 +42,7 @@ class Professor(models.Model):
     nome = models.TextField()
     cpf = models.IntegerField()
     tag = models.TextField()
+    tipo = models.TextField(default = 'Professor')
 
     def __unicode__(self):
         return '%s' % self.nome
@@ -57,7 +58,7 @@ class Tecnico(models.Model):
     nome = models.TextField()
     cpf = models.IntegerField()
     tag = models.TextField()
-
+    tipo = models.TextField(default = 'Tecnico')
 
     def __unicode__(self):
         return '%s' % self.nome
@@ -71,6 +72,7 @@ class Tecnico(models.Model):
 
 class Aluno(models.Model):
     nome = models.TextField()
+    tipo = models.TextField(default = 'Aluno')
     cpf = models.IntegerField()
     tag = models.TextField()
     lab = models.ForeignKey('Laboratorio', blank=True, null=True)
